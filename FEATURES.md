@@ -52,7 +52,7 @@
   - Gestion des commentaires
   - Statistiques détaillées (étudiants, notes, ressources)
   
-- ✅ **Création de Cours** (`/teacher/create-course`) :
+- ✅ **Création de Cours** (`/admin/create-course`) :
   - Formulaire complet pour créer un nouveau cours
   - Gestion des modules et leçons
   - Objectifs d'apprentissage
@@ -120,7 +120,7 @@
 - `/teacher` - Dashboard
 - `/teacher/courses` - Mes cours
 - `/teacher/projects` - Projets étudiants
-- `/teacher/create-course` - Créer un cours
+- `/admin/create-course` - Créer un cours
 - `/teacher/students` - Étudiants
 - `/teacher/messages` - Messages
 
@@ -131,7 +131,6 @@
 - `/admin/courses` - Gestion cours
 - `/admin/categories` - Catégories
 - `/admin/payments` - Paiements
-- `/admin/subscriptions` - Abonnements
 - `/admin/settings` - Paramètres
 
 ## 💡 Fonctionnalités Clés

@@ -9,6 +9,7 @@ import {
   Star,
   ArrowRight,
   CheckCircle,
+  Play,
 } from 'lucide-react';
 
 export function LandingPage() {
@@ -16,7 +17,8 @@ export function LandingPage() {
     {
       id: 1,
       title: 'Développement Web Full Stack',
-      description: 'Apprenez à créer des applications web complètes avec React, Node.js et MongoDB',
+      description:
+        'Apprenez à créer des applications web complètes avec React, Node.js et MongoDB',
       image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
       category: 'Développement',
       students: 1234,
@@ -26,7 +28,8 @@ export function LandingPage() {
     {
       id: 2,
       title: 'Data Science avec Python',
-      description: 'Maîtrisez l\'analyse de données et le machine learning avec Python',
+      description:
+        "Maîtrisez l'analyse de données et le machine learning avec Python",
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
       category: 'Data Science',
       students: 892,
@@ -36,7 +39,8 @@ export function LandingPage() {
     {
       id: 3,
       title: 'Design UX/UI Moderne',
-      description: 'Créez des interfaces utilisateur élégantes et intuitives',
+      description:
+        'Créez des interfaces utilisateur élégantes et intuitives',
       image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5',
       category: 'Design',
       students: 756,
@@ -46,7 +50,8 @@ export function LandingPage() {
     {
       id: 4,
       title: 'Marketing Digital',
-      description: 'Développez vos compétences en marketing digital et réseaux sociaux',
+      description:
+        'Développez vos compétences en marketing digital et réseaux sociaux',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f',
       category: 'Marketing',
       students: 1045,
@@ -59,38 +64,39 @@ export function LandingPage() {
     {
       name: 'Sarah Martin',
       role: 'Développeuse Web',
-      content: 'Iz Academy m\'a permis de changer de carrière. Les cours sont excellents et les formateurs très disponibles.',
+      content:
+        "Iz Academy m'a permis de changer de carrière. Les cours sont excellents et les formateurs très disponibles.",
       rating: 5,
     },
     {
       name: 'Thomas Dubois',
       role: 'Data Analyst',
-      content: 'Une plateforme intuitive avec des cours de qualité. J\'ai pu progresser à mon rythme.',
+      content:
+        "Une plateforme intuitive avec des cours de qualité. J'ai pu progresser à mon rythme.",
       rating: 5,
     },
     {
       name: 'Marie Laurent',
       role: 'Designer UX',
-      content: 'Les projets pratiques sont vraiment enrichissants. J\'ai obtenu mon certificat en 3 mois.',
+      content:
+        "Les projets pratiques sont vraiment enrichissants. J'ai obtenu mon certificat en 3 mois.",
       rating: 5,
     },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col scroll-smooth">
       <Navbar />
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        {/* Background gradient */}
-<div className="absolute inset-0 bg-gradient-to-br from-green-100 via-blue-100 to-pink-100"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-green-100 via-blue-100 to-pink-100" />
+
         <div className="relative max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left content */}
             <div className="max-w-xl">
-              <h1
-                className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-primary"
-              >
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-primary">
                 Apprenez à votre rythme avec Iz Academy
               </h1>
 
@@ -100,17 +106,16 @@ export function LandingPage() {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Link
-                  to="/register"
+                <a
+                  href="#demo"
                   className="px-8 py-3 text-white rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,82,233,0.5)] inline-flex items-center gap-2"
                   style={{
-                    backgroundImage:
-                      "linear-gradient(90deg, #000000, #000000)",
+                    backgroundImage: 'linear-gradient(90deg, #000000, #000000)',
                   }}
                 >
-                  Commencer gratuitement
+                  Voir démonstration
                   <ArrowRight className="w-5 h-5" />
-                </Link>
+                </a>
 
                 <Link
                   to="/courses"
@@ -155,7 +160,9 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl mb-4">Pourquoi choisir Iz Academy ?</h2>
+            <h2 className="text-3xl md:text-4xl mb-4">
+              Pourquoi choisir Iz Academy ?
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Une plateforme complète pour votre apprentissage en ligne
             </p>
@@ -209,7 +216,9 @@ export function LandingPage() {
       <section id="courses" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl mb-4">Nos cours populaires</h2>
+            <h2 className="text-3xl md:text-4xl mb-4">
+              Nos cours populaires
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Découvrez nos formations les plus demandées
             </p>
@@ -229,7 +238,9 @@ export function LandingPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <div className="text-sm text-primary mb-2">{course.category}</div>
+                  <div className="text-sm text-primary mb-2">
+                    {course.category}
+                  </div>
                   <h3 className="mb-2 line-clamp-1">{course.title}</h3>
                   <p className="text-muted-foreground mb-4 line-clamp-2">
                     {course.description}
@@ -273,7 +284,9 @@ export function LandingPage() {
       <section className="py-20 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl mb-4">Ce que disent nos étudiants</h2>
+            <h2 className="text-3xl md:text-4xl mb-4">
+              Ce que disent nos étudiants
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Des milliers d'étudiants nous font confiance
             </p>
@@ -281,19 +294,138 @@ export function LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(105,63,203,0.3)]">
+              <div
+                key={index}
+                className="bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(105,63,203,0.3)]"
+              >
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <Star
+                      key={i}
+                      className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                    />
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-6">{testimonial.content}</p>
+                <p className="text-muted-foreground mb-6">
+                  {testimonial.content}
+                </p>
                 <div>
                   <div className="font-semibold">{testimonial.name}</div>
-                  <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Video Section */}
+      <section id="demo" className="py-20 px-4 scroll-mt-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl mb-4">
+              Découvrez Iz Academy en action
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Explorez notre plateforme et voyez comment elle facilite
+              l'apprentissage pour tous
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Video Placeholder */}
+<div className="relative aspect-video rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,82,233,0.45),0_0_60px_rgba(105,63,203,0.35),0_0_90px_rgba(223,98,160,0.3)] group"
+            >
+              <img   src="https://images.unsplash.com/photo-1771054244019-96f9db9720b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBsZWFybmluZyUyMHZpZGVvJTIwY29uZmVyZW5jZSUyMGVkdWNhdGlvbnxlbnwxfHx8fDE3NzM1MTI2Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                alt="Démo de la plateforme Iz Academy"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/30 transition">
+                <button
+                  type="button"
+                  className="w-20 h-20 bg-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-[0_0_30px_rgba(255,255,255,0.8)]"
+                >
+                  <Play className="w-10 h-10 text-primary ml-1" />
+                </button>
+              </div>
+            </div>
+
+            {/* Features List */}
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">Interface intuitive</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Navigation simple et claire pour étudiants, formateurs et
+                    administrateurs
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">
+                    Progression en temps réel
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Suivez votre avancement et débloquez les quiz après avoir
+                    complété les leçons
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">
+                    Validation par des experts
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Vos projets sont évalués par des formateurs professionnels
+                    avec feedback détaillé
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-2">
+                    Certification reconnue
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Obtenez votre certificat automatiquement en remplissant les
+                    critères de réussite
+                  </p>
+                </div>
+              </div>
+
+              {/*<div className="pt-4">
+                <Link
+                  to="/register"
+                  className="px-8 py-3 text-white rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(56,82,233,0.5)] inline-flex items-center gap-2"
+                  style={{
+                    backgroundImage:
+                      'linear-gradient(90deg, #3852e9, #693fcb)',
+                  }}
+                >
+                  Commencer gratuitement
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>*/}
+            </div>
           </div>
         </div>
       </section>
@@ -303,7 +435,8 @@ export function LandingPage() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl mb-4">Restez informé</h2>
           <p className="text-muted-foreground mb-8">
-            Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités
+            Inscrivez-vous à notre newsletter pour recevoir nos dernières
+            actualités
           </p>
           <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input

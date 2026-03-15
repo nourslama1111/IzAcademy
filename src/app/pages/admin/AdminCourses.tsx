@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { AdminLayout } from '../../components/AdminLayout';
 import { Search, Plus, Edit, Trash2, Eye } from 'lucide-react';
 import { useState } from 'react';
@@ -16,10 +17,12 @@ export function AdminCourses() {
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="flex items-center justify-between">
           <h1>Gestion des cours</h1>
-          <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition flex items-center gap-2">
-            <Plus className="w-4 h-4" />
-            Créer un cours
-          </button>
+          <Link to="/admin/create-course">
+  <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition flex items-center gap-2">
+    <Plus className="w-4 h-4" />
+    Créer un cours
+  </button>
+</Link>
         </div>
 
         <div className="bg-white border border-border rounded-xl p-4">

@@ -14,13 +14,12 @@ import { TeacherStudents } from "./pages/teacher/TeacherStudents";
 import { TeacherMessages } from "./pages/teacher/TeacherMessages";
 import { TeacherCourses } from "./pages/teacher/TeacherCourses";
 import { TeacherProjects } from "./pages/teacher/TeacherProjects";
-import { TeacherCreateCourse } from "./pages/teacher/TeacherCreateCourse";
+import { AdminCreateCourse } from "./pages/admin/AdminCreateCourse";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminUsers } from "./pages/admin/AdminUsers";
 import { AdminCourses } from "./pages/admin/AdminCourses";
 import { AdminCategories } from "./pages/admin/AdminCategories";
 import { AdminPayments } from "./pages/admin/AdminPayments";
-import { AdminSubscriptions } from "./pages/admin/AdminSubscriptions";
 import { AdminSettings } from "./pages/admin/AdminSettings";
 import { AdminEnrollmentRequests } from "./pages/admin/AdminEnrollmentRequests";
 import { Login } from "./pages/Login";
@@ -109,8 +108,8 @@ export const router = createBrowserRouter([
     Component: TeacherProjects,
   },
   {
-    path: "/teacher/create-course",
-    Component: TeacherCreateCourse,
+    path: "/admin/create-course",
+    Component: AdminCreateCourse,
   },
   // Admin Routes
   {
@@ -132,10 +131,6 @@ export const router = createBrowserRouter([
   {
     path: "/admin/payments",
     Component: AdminPayments,
-  },
-  {
-    path: "/admin/subscriptions",
-    Component: AdminSubscriptions,
   },
   {
     path: "/admin/settings",

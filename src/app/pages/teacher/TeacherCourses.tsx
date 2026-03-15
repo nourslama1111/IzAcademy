@@ -167,12 +167,7 @@ export function TeacherCourses() {
               Gérez vos cours et ajoutez des ressources
             </p>
           </div>
-          <Button asChild>
-            <Link to="/teacher/create-course">
-              <PlusCircle className="w-5 h-5 mr-2" />
-              Créer un cours
-            </Link>
-          </Button>
+          
         </div>
 
         {/* Statistiques */}

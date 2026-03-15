@@ -12,6 +12,8 @@ import {
   LogOut,
   User,
   Bell,
+  PlusCircle,
+
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -30,7 +32,6 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     { name: 'Cours', href: '/admin/courses', icon: BookOpen },
     { name: 'Catégories', href: '/admin/categories', icon: FolderTree },
     { name: 'Paiements', href: '/admin/payments', icon: CreditCard },
-    { name: 'Abonnements', href: '/admin/subscriptions', icon: Tag },
     { name: 'Paramètres', href: '/admin/settings', icon: Settings },
   ];
 

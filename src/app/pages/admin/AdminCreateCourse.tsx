@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TeacherLayout } from '../../components/TeacherLayout';
+import { AdminLayout } from '../../components/AdminLayout';
 import { useNavigate } from 'react-router';
 import { PlusCircle, Trash2, ArrowLeft } from 'lucide-react';
 import { Card, CardContent } from '../../components/ui/card';
@@ -16,7 +16,7 @@ interface Module {
   lessons: string[];
 }
 
-export function TeacherCreateCourse() {
+export function AdminCreateCourse() {
   const navigate = useNavigate();
   const [courseTitle, setCourseTitle] = useState('');
   const [shortDescription, setShortDescription] = useState('');
@@ -99,18 +99,18 @@ export function TeacherCreateCourse() {
     // Simulation de la création du cours
     toast.success('Cours créé avec succès !');
     setTimeout(() => {
-      navigate('/teacher/courses');
+      navigate('//courses');
     }, 1000);
   };
 
   return (
-    <TeacherLayout>
+    <AdminLayout>
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex items-center gap-4">
           <Button 
             variant="outline" 
             size="icon"
-            onClick={() => navigate('/teacher/courses')}
+            onClick={() => navigate('/admin/courses')}
           >
             <ArrowLeft className="w-5 h-5" />
           </Button>
@@ -331,13 +331,13 @@ export function TeacherCreateCourse() {
               type="button" 
               variant="outline" 
               size="lg"
-              onClick={() => navigate('/teacher/courses')}
+              onClick={() => navigate('/admin/courses')}
             >
               Annuler
             </Button>
           </div>
         </form>
       </div>
-    </TeacherLayout>
+    </AdminLayout>
   );
 }

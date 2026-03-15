@@ -9,7 +9,6 @@ import {
   User,
   BookOpen,
   FolderGit2,
-  PlusCircle,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -26,8 +25,7 @@ export function TeacherLayout({ children }: TeacherLayoutProps) {
     { name: 'Mes cours', href: '/teacher/courses', icon: BookOpen },
     { name: 'Projets étudiants', href: '/teacher/projects', icon: FolderGit2 },
     { name: 'Étudiants', href: '/teacher/students', icon: Users },
-    { name: 'Messages', href: '/teacher/messages', icon: MessageSquare },
-    { name: 'Créer un cours', href: '/teacher/create-course', icon: PlusCircle },
+    { name: 'Messages', href: '/teacher/messages', icon: MessageSquare }
   ];
 
   return (
