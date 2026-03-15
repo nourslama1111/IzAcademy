@@ -48,6 +48,7 @@ export const router = createBrowserRouter([
     path: "/contact",
     Component: Contact,
   },
+
   // Public Course Routes
   {
     path: "/courses",
@@ -57,6 +58,7 @@ export const router = createBrowserRouter([
     path: "/course/:id",
     Component: CourseDetailPage,
   },
+
   // Student Routes
   {
     path: "/student",
@@ -75,7 +77,7 @@ export const router = createBrowserRouter([
     Component: StudentQuiz,
   },
   {
-    path: "/student/projects",
+    path: "/student/projects/:courseId",
     Component: StudentProjects,
   },
   {
@@ -86,6 +88,7 @@ export const router = createBrowserRouter([
     path: "/student/certificates",
     Component: StudentCertificates,
   },
+
   // Teacher Routes
   {
     path: "/teacher",
@@ -107,11 +110,12 @@ export const router = createBrowserRouter([
     path: "/teacher/projects",
     Component: TeacherProjects,
   },
+
+  // Admin Routes
   {
     path: "/admin/create-course",
     Component: AdminCreateCourse,
   },
-  // Admin Routes
   {
     path: "/admin",
     Component: AdminDashboard,

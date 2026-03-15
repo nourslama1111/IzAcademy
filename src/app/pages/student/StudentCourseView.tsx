@@ -8,7 +8,7 @@ import {
   ChevronUp,
   FileText,
   Video,
-  MessageSquare,
+  FolderKanban,
   Send,
   ThumbsUp,
   Award,
@@ -47,7 +47,7 @@ export function StudentCourseView() {
         title: 'Introduction au développement web',
         lessons: [
           { id: 0, title: 'Présentation du cours', type: 'video', duration: '10:23' },
-          { id: 1, title: 'Configuration de l\'environnement', type: 'video', duration: '15:45' },
+          { id: 1, title: "Configuration de l'environnement", type: 'video', duration: '15:45' },
           { id: 2, title: 'HTML et CSS de base', type: 'video', duration: '25:30' },
         ],
       },
@@ -72,9 +72,9 @@ export function StudentCourseView() {
     ],
   };
 
-  const currentLesson = course.sections
-    .flatMap((s) => s.lessons)
-    .find((l) => l.id === selectedLesson) || course.sections[0].lessons[0];
+  const currentLesson =
+    course.sections.flatMap((s) => s.lessons).find((l) => l.id === selectedLesson) ||
+    course.sections[0].lessons[0];
 
   const comments = [
     {
@@ -89,7 +89,7 @@ export function StudentCourseView() {
       id: 2,
       author: 'Thomas Dubois',
       avatar: 'TD',
-      content: 'J\'ai une question sur l\'utilisation de useEffect...',
+      content: "J'ai une question sur l'utilisation de useEffect...",
       time: 'Il y a 5 heures',
       likes: 2,
       reply: {
@@ -242,7 +242,6 @@ export function StudentCourseView() {
                           <span>{comment.time}</span>
                         </div>
 
-                        {/* Reply */}
                         {comment.reply && (
                           <div className="flex gap-3 mt-4 ml-8">
                             <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold">
@@ -269,8 +268,23 @@ export function StudentCourseView() {
             </div>
           </div>
 
-          {/* Course Content Sidebar */}
+          {/* Right Column */}
           <div className="space-y-6">
+            {/* Projects Content */}
+            <div className="bg-white border border-border rounded-xl overflow-hidden">
+              <div className="p-4 border-b border-border">
+                <h3 className="mb-4">Contenu du cours</h3>
+
+                <Link
+                  to={`/student/projects/${courseId}`}
+                  className="w-full px-4 py-3 bg-black text-white rounded-lg hover:bg-black/90 transition text-center flex items-center justify-center gap-2"
+                >
+                  <FolderKanban className="w-5 h-5" />
+                  Project
+                </Link>
+              </div>
+            </div>
+
             {/* Progress */}
             <div className="bg-white border border-border rounded-xl p-6">
               <h3 className="mb-4">Progression du cours</h3>
@@ -295,7 +309,10 @@ export function StudentCourseView() {
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                     <div className="text-sm text-green-800">
                       <p className="font-medium mb-1">Félicitations !</p>
-                      <p>Vous avez terminé toutes les leçons. Vous pouvez maintenant passer le quiz final.</p>
+                      <p>
+                        Vous avez terminé toutes les leçons. Vous pouvez maintenant passer le quiz
+                        final.
+                      </p>
                     </div>
                   </div>
                   <Link
@@ -314,7 +331,11 @@ export function StudentCourseView() {
                       <p className="font-medium mb-1">Quiz verrouillé</p>
                       <p>Terminez toutes les leçons pour débloquer le quiz final.</p>
                       <p className="mt-2 text-xs">
-                        Il vous reste <span className="font-semibold">{totalLessons - completedCount}</span> leçon{totalLessons - completedCount > 1 ? 's' : ''} à terminer.
+                        Il vous reste{' '}
+                        <span className="font-semibold">
+                          {totalLessons - completedCount}
+                        </span>{' '}
+                        leçon{totalLessons - completedCount > 1 ? 's' : ''} à terminer.
                       </p>
                     </div>
                   </div>
@@ -360,9 +381,7 @@ export function StudentCourseView() {
                             )}
                             <div className="flex-1 min-w-0">
                               <div className="font-medium truncate">{lesson.title}</div>
-                              <div className="text-sm text-muted-foreground">
-                                {lesson.duration}
-                              </div>
+                              <div className="text-sm text-muted-foreground">{lesson.duration}</div>
                             </div>
                           </button>
                         ))}
