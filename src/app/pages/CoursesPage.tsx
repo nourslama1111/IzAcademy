@@ -118,23 +118,14 @@ const allCourses = [
 export function CoursesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedLevel, setSelectedLevel] = useState('all');
-  const [selectedInstructor, setSelectedInstructor] = useState('all');
-
-  // Extraire les catégories, niveaux et instructeurs uniques
+  // Extraire les catégories uniques
   const categories = ['all', ...new Set(allCourses.map(c => c.category))];
-  const levels = ['all', ...new Set(allCourses.map(c => c.level))];
-  const instructors = ['all', ...new Set(allCourses.map(c => c.instructor))];
-
   // Filtrer les cours
   const filteredCourses = allCourses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || course.category === selectedCategory;
-    const matchesLevel = selectedLevel === 'all' || course.level === selectedLevel;
-    const matchesInstructor = selectedInstructor === 'all' || course.instructor === selectedInstructor;
-    
-    return matchesSearch && matchesCategory && matchesLevel && matchesInstructor;
+    return matchesSearch && matchesCategory;
   });
 
   return (
@@ -186,39 +177,6 @@ export function CoursesPage() {
               </Select>
             </div>
 
-            {/* Filtre Niveau */}
-            <div>
-              <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Niveau" />
-                </SelectTrigger>
-                <SelectContent>
-                  {levels.map(level => (
-                    <SelectItem key={level} value={level}>
-                      {level === 'all' ? 'Tous les niveaux' : level}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Filtre Formateur - Optionnel sur mobile */}
-          <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="md:col-start-1">
-              <Select value={selectedInstructor} onValueChange={setSelectedInstructor}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Formateur" />
-                </SelectTrigger>
-                <SelectContent>
-                  {instructors.map(instructor => (
-                    <SelectItem key={instructor} value={instructor}>
-                      {instructor === 'all' ? 'Tous les formateurs' : instructor}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
           </div>
         </div>
       </div>
