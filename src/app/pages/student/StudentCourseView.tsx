@@ -152,14 +152,7 @@ export function StudentCourseView() {
                       <Video className="w-4 h-4" />
                       {currentLesson.duration}
                     </span>
-                    {isLessonCompleted(currentLesson.id) && (
-                      <span className="flex items-center gap-1 text-green-600">
-                        <CheckCircle className="w-4 h-4" />
-                        Terminée
-                      </span>
-                    )}
-                  </div>
-                  {!isLessonCompleted(currentLesson.id) && (
+                    {!isLessonCompleted(currentLesson.id) ? (
                     <button
                       onClick={() => markLessonAsCompleted(currentLesson.id)}
                       className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center gap-2"
@@ -167,10 +160,19 @@ export function StudentCourseView() {
                       <CheckCircle className="w-4 h-4" />
                       Marquer comme terminée
                     </button>
+                  ) : (
+                    <Link
+                      to={`/student/quiz/${courseId}/${currentLesson.id}`}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+                    >
+                      <Award className="w-4 h-4" />
+                      Passer le quiz de la leçon
+                    </Link>
                   )}
                 </div>
               </div>
             </div>
+          </div>
 
             {/* Resources */}
             <div className="bg-white border border-border rounded-xl p-6">
@@ -273,7 +275,7 @@ export function StudentCourseView() {
             {/* Projects Content */}
             <div className="bg-white border border-border rounded-xl overflow-hidden">
               <div className="p-4 border-b border-border">
-                <h3 className="mb-4">Contenu du cours</h3>
+                <h3 className="mb-4">Choisir un projet à faire</h3>
 
                 <Link
                   to={`/student/projects/${courseId}`}

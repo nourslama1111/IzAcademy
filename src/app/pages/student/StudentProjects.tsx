@@ -1,14 +1,17 @@
 import { StudentLayout } from '../../components/StudentLayout';
 import { Github, CheckCircle, Clock, Download } from 'lucide-react';
-import { useState } from 'react';
 import { useParams } from 'react-router';
+import { useState, useEffect } from 'react';
+
 
 export function StudentProjects() {
   const { courseId } = useParams();
 
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [githubLink, setGithubLink] = useState('');
+  const [canAccessProjects, setCanAccessProjects] = useState(false);
   const [description, setDescription] = useState('');
+    const [isChecking, setIsChecking] = useState(true);
 
   const projectCatalog = [
     {
@@ -117,6 +120,23 @@ export function StudentProjects() {
     },
   ];
 
+  useEffect(() => {
+      const checkAccess = () => {
+        const savedCompleted = localStorage.getItem(`course_${courseId}_completed`);
+        const totalLessons = 9; // Total des leçons du cours
+  
+        if (savedCompleted) {
+          const completedLessons = JSON.parse(savedCompleted);
+          if (completedLessons.length >= totalLessons) {
+            setCanAccessProjects(true);
+          }
+        }
+        setIsChecking(false);
+      };
+  
+      checkAccess();
+    }, [courseId]);
+
   const courseProjects = projectCatalog.filter((project) => project.courseId === courseId);
   const courseSubmittedProjects = submittedProjects.filter(
     (project) => project.courseId === courseId
@@ -124,6 +144,10 @@ export function StudentProjects() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!canAccessProjects) {
+      alert('Veuillez compléter toutes les leçons avant de soumettre le projet.');
+      return;
+    }
     alert('Projet soumis avec succès ! Vous recevrez une notification lors de la validation.');
     setSelectedProject(null);
     setGithubLink('');
@@ -250,6 +274,11 @@ export function StudentProjects() {
                   />
                 </div>
 
+                {!canAccessProjects && (
+                  <div className="mb-4 rounded-lg border border-yellow-200 bg-yellow-50 px-4 py-3 text-sm text-yellow-800">
+                    Veuillez compléter toutes les leçons d'abord pour pouvoir soumettre ce projet.
+                  </div>
+                )}
                 <div className="flex gap-4">
                   <button
                     type="button"
@@ -264,7 +293,12 @@ export function StudentProjects() {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition"
+                    disabled={!canAccessProjects}
+                    className={`flex-1 px-6 py-3 rounded-lg transition ${
+                      canAccessProjects
+                        ? 'bg-primary text-primary-foreground hover:opacity-90'
+                        : 'bg-slate-300 text-slate-600 cursor-not-allowed'
+                    }`}
                   >
                     Soumettre
                   </button>

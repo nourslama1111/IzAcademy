@@ -6,6 +6,7 @@ import {
   MessageSquare,
   GraduationCap,
   Menu,
+  ClipboardCheck,
   X,
   LogOut,
   User,
@@ -24,6 +25,7 @@ export function StudentLayout({ children }: StudentLayoutProps) {
   const navigation = [
     { name: 'Tableau de bord', href: '/student', icon: LayoutDashboard },
     { name: 'Mes cours', href: '/student/courses', icon: BookOpen },
+    { name: 'Test de niveau', href: '/student/test-niveau', icon: ClipboardCheck },
     { name: 'Projets', href: '/student/projects', icon: FolderGit2 },
     { name: 'Certificats', href: '/student/certificates', icon: Award },
     { name: 'Messages', href: '/student/messages', icon: MessageSquare },

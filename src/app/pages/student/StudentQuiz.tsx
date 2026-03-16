@@ -4,7 +4,7 @@ import { CheckCircle, XCircle, Award, Lock, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function StudentQuiz() {
-  const { courseId } = useParams();
+  const { courseId, lessonId } = useParams();
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
@@ -12,23 +12,31 @@ export function StudentQuiz() {
   const [canAccessQuiz, setCanAccessQuiz] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
 
-  // Vérifier si l'étudiant a terminé toutes les leçons
+  // Vérifier si l'étudiant peut accéder au quiz (final ou de leçon)
   useEffect(() => {
     const checkAccess = () => {
       const savedCompleted = localStorage.getItem(`course_${courseId}_completed`);
-      const totalLessons = 9; // Total des leçons du cours
 
-      if (savedCompleted) {
-        const completedLessons = JSON.parse(savedCompleted);
-        if (completedLessons.length >= totalLessons) {
-          setCanAccessQuiz(true);
-        }
+      if (!savedCompleted) {
+        setIsChecking(false);
+        return;
       }
+
+      const completedLessons: number[] = JSON.parse(savedCompleted);
+
+      if (lessonId) {
+        const lessonNum = Number(lessonId);
+        setCanAccessQuiz(completedLessons.includes(lessonNum));
+      } else {
+        const totalLessons = 9; // Total des leçons du cours
+        setCanAccessQuiz(completedLessons.length >= totalLessons);
+      }
+
       setIsChecking(false);
     };
 
     checkAccess();
-  }, [courseId]);
+  }, [courseId, lessonId]);
 
   const quiz = {
     courseTitle: 'Développement Web Full Stack',
@@ -86,12 +94,22 @@ export function StudentQuiz() {
     ],
   };
 
+  // Pour un quiz de leçon, on peut filtrer ou réutiliser un sous-ensemble de questions.
+  const lessonQuiz = lessonId
+    ? {
+        courseTitle: `Quiz de la leçon ${lessonId}`,
+        questions: quiz.questions.slice(0, 3),
+      }
+    : quiz;
+
+  const activeQuiz = lessonId ? lessonQuiz : quiz;
+
   const handleAnswerSelect = (answerId: number) => {
     setSelectedAnswers({ ...selectedAnswers, [currentQuestion]: answerId });
   };
 
   const handleNext = () => {
-    if (currentQuestion < quiz.questions.length - 1) {
+    if (currentQuestion < activeQuiz.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     }
   };
@@ -108,15 +126,15 @@ export function StudentQuiz() {
 
   const calculateScore = () => {
     let correct = 0;
-    quiz.questions.forEach((question) => {
+    activeQuiz.questions.forEach((question) => {
       if (selectedAnswers[question.id] === question.correctAnswer) {
         correct++;
       }
     });
     return {
       correct,
-      total: quiz.questions.length,
-      percentage: Math.round((correct / quiz.questions.length) * 100),
+      total: activeQuiz.questions.length,
+      percentage: Math.round((correct / activeQuiz.questions.length) * 100),
     };
   };
 
@@ -144,34 +162,42 @@ export function StudentQuiz() {
       <StudentLayout>
         <div className="max-w-4xl mx-auto">
           <div className="bg-white border border-border rounded-xl p-8">
-            <div className="text-center mb-8">
-              <div className="w-24 h-24 rounded-full bg-yellow-100 mx-auto mb-6 flex items-center justify-center">
-                <Lock className="w-12 h-12 text-yellow-600" />
-              </div>
-              <h1 className="mb-4">Quiz verrouillé</h1>
-              <p className="text-xl text-muted-foreground mb-8">
-                Vous devez terminer toutes les leçons du cours avant d'accéder au quiz final.
-              </p>
-            </div>
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="font-semibold mb-2 text-yellow-900">Conditions pour passer le quiz :</h3>
+                  <h3 className="font-semibold mb-2 text-yellow-900">
+                    Conditions pour passer le quiz :
+                  </h3>
                   <ul className="space-y-2 text-sm text-yellow-800">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
-                      Visionner toutes les vidéos du cours
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
-                      Marquer chaque leçon comme terminée
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
-                      Atteindre 100% de progression dans le cours
-                    </li>
+                    {lessonId ? (
+                      <>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+                          Marquer cette leçon comme terminée
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+                          Revenir à la leçon pour lancer le quiz
+                        </li>
+                      </>
+                    ) : (
+                      <>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+                          Visionner toutes les vidéos du cours
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+                          Marquer chaque leçon comme terminée
+                        </li>
+                        <li className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
+                          Atteindre 100% de progression dans le cours
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -264,7 +290,7 @@ export function StudentQuiz() {
             <div className="mt-12 pt-8 border-t border-border text-left">
               <h3 className="mb-6">Résultats détaillés</h3>
               <div className="space-y-4">
-                {quiz.questions.map((question) => {
+                {activeQuiz.questions.map((question) => {
                   const isCorrect =
                     selectedAnswers[question.id] === question.correctAnswer;
                   return (
@@ -306,9 +332,9 @@ export function StudentQuiz() {
     );
   }
 
-  const question = quiz.questions[currentQuestion];
+  const question = activeQuiz.questions[currentQuestion];
   const answeredQuestions = Object.keys(selectedAnswers).length;
-  const allAnswered = answeredQuestions === quiz.questions.length;
+  const allAnswered = answeredQuestions === activeQuiz.questions.length;
 
   return (
     <StudentLayout>
@@ -320,25 +346,27 @@ export function StudentQuiz() {
           >
             ← Retour au cours
           </Link>
-          <h1 className="mb-2">Quiz Final</h1>
-          <p className="text-muted-foreground">{quiz.courseTitle}</p>
+          <h1 className="mb-2">
+            {lessonId ? 'Quiz de la leçon' : 'Quiz final'}
+          </h1>
+          <p className="text-muted-foreground">{activeQuiz.courseTitle}</p>
         </div>
 
         {/* Progress */}
         <div className="bg-white border border-border rounded-xl p-6">
           <div className="flex items-center justify-between mb-2">
             <span className="text-muted-foreground">
-              Question {currentQuestion + 1} sur {quiz.questions.length}
+              Question {currentQuestion + 1} sur {activeQuiz.questions.length}
             </span>
             <span className="text-muted-foreground">
-              {answeredQuestions} / {quiz.questions.length} répondues
+              {answeredQuestions} / {activeQuiz.questions.length} répondues
             </span>
           </div>
           <div className="w-full h-2 bg-accent rounded-full overflow-hidden">
             <div
               className="h-full bg-primary transition-all"
               style={{
-                width: `${((currentQuestion + 1) / quiz.questions.length) * 100}%`,
+                width: `${((currentQuestion + 1) / activeQuiz.questions.length) * 100}%`,
               }}
             />
           </div>
@@ -395,7 +423,7 @@ export function StudentQuiz() {
           </button>
 
           <div className="flex gap-2">
-            {quiz.questions.map((_, index) => (
+            {activeQuiz.questions.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentQuestion(index)}
@@ -415,7 +443,7 @@ export function StudentQuiz() {
             ))}
           </div>
 
-          {currentQuestion === quiz.questions.length - 1 && allAnswered ? (
+          {currentQuestion === activeQuiz.questions.length - 1 && allAnswered ? (
             <button
               onClick={handleSubmit}
               className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
@@ -425,7 +453,7 @@ export function StudentQuiz() {
           ) : (
             <button
               onClick={handleNext}
-              disabled={currentQuestion === quiz.questions.length - 1}
+              disabled={currentQuestion === activeQuiz.questions.length - 1}
               className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Suivant

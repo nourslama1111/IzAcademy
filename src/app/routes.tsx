@@ -3,6 +3,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { CoursesPage } from "./pages/CoursesPage";
 import { CourseDetailPage } from "./pages/CourseDetailPage";
 import { StudentDashboard } from "./pages/student/StudentDashboard";
+import { StudentLevelTest } from "./pages/student/StudentLevelTest";
 import { StudentCourses } from "./pages/student/StudentCourses";
 import { StudentCourseView } from "./pages/student/StudentCourseView";
 import { StudentQuiz } from "./pages/student/StudentQuiz";
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
     Component: StudentDashboard,
   },
   {
+    path: "/student/test-niveau",
+    Component: StudentLevelTest,
+  },
+  {
     path: "/student/courses",
     Component: StudentCourses,
   },
@@ -74,6 +79,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/student/quiz/:courseId",
+    Component: StudentQuiz,
+  },
+  {
+    path: "/student/quiz/:courseId/:lessonId",
     Component: StudentQuiz,
   },
   {
@@ -145,3 +154,9 @@ export const router = createBrowserRouter([
     Component: AdminEnrollmentRequests,
   },
 ]);
+
+
+
+
+
+
