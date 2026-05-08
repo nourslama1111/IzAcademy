@@ -1,5 +1,5 @@
 
-  # E-Learning Platform Design (Community)
+  # E-Learning Platform Design 
 
   This is a code bundle for E-Learning Platform Design
   ## Running the code
